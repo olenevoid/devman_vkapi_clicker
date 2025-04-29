@@ -1,6 +1,6 @@
 import requests
 from dotenv import load_dotenv
-from os import getenv
+from os import environ
 from urllib.parse import urlparse
 
 
@@ -66,7 +66,7 @@ def is_shorten_link(url) -> bool:
 
 def main():
     load_dotenv()
-    vk_token = getenv('VK_TOKEN')
+    vk_token = environ['VK_TOKEN']
 
     url = input('Введите ссылку: ')
     try:

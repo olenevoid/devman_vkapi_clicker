@@ -7,17 +7,6 @@ from urllib.parse import urlparse
 VK_API_VERSION = '5.199'
 
 
-def make_request(params: dict, url: str) -> requests.Response:
-    response = requests.get(url, params=params)
-
-    response.raise_for_status()
-
-    if 'error' in response.json():
-        raise requests.exceptions.HTTPError(response=response)
-
-    return response
-
-
 def shorten_link(token: str, url: str, private: int = 0) -> str:
     params = {
         'access_token': token,

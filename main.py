@@ -17,10 +17,12 @@ def shorten_link(token: str, url: str, private: int = 0) -> str:
 
     request_url = 'https://api.vk.ru/method/utils.getShortLink'
 
-    try:
-        response = make_request(params, request_url)
-    except requests.exceptions.HTTPError:
-        raise
+    response = requests.get(request_url, params=params)
+
+    response.raise_for_status()
+
+    if 'error' in response.json():
+        raise requests.exceptions.HTTPError(response=response)
 
     short_link = response.json()['response']['short_url']
 
@@ -38,10 +40,12 @@ def count_clicks(token: str, url: str) -> int | None:
 
     request_url = 'https://api.vk.ru/method/utils.getLinkStats'
 
-    try:
-        response = make_request(params, request_url)
-    except requests.exceptions.HTTPError:
-        raise
+    response = requests.get(request_url, params=params)
+
+    response.raise_for_status()
+
+    if 'error' in response.json():
+        raise requests.exceptions.HTTPError(response=response)
 
     stats = response.json()['response']['stats']
 

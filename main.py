@@ -93,7 +93,7 @@ def main():
             print('Сокращенная ссылка:', short_link)
 
     except requests.exceptions.InvalidURL:
-        print('Неверная ссылка')
+        print('Вы ввели неверную ссылку')
 
 
 if __name__ == '__main__':

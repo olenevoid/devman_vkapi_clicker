@@ -78,13 +78,14 @@ def main():
 
     url = input('Введите ссылку: ')
     try:
-        if is_shorten_link(url):
+        if is_shorten_link(vk_token, url):
 
             clicks = count_clicks(vk_token, url)
+
             if clicks is None:
-                print('Количество кликов:', clicks)
-            else:
                 print('Возможно, превышен лимит обращений к API.')
+            else:
+                print('Количество кликов:', clicks)
 
         else:
 

@@ -30,10 +30,11 @@ def shorten_link(token: str, url: str, private: int = 0) -> str:
 
 
 def count_clicks(token: str, url: str) -> int | None:
+    parsed_link = urlparse(url)
     params = {
         'access_token': token,
         'v': VK_API_VERSION,
-        'key': url.split('/')[-1],
+        'key': parsed_link.path.replace('/', ''),
         'interval': 'forever',
         'extended': 0
         }

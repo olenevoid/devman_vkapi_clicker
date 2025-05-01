@@ -45,10 +45,12 @@ def count_clicks(token: str, url: str) -> int | None:
 
     response.raise_for_status()
 
-    if 'error' in response.json():
+    response_data = response.json()
+
+    if 'error' in response_data:
         raise requests.exceptions.InvalidURL(response=response)
 
-    stats = response.json()['response']['stats']
+    stats = response_data['response']['stats']
 
     if len(stats) < 1:
         return None

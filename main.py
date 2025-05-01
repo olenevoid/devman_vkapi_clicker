@@ -58,11 +58,13 @@ def count_clicks(token: str, url: str) -> int | None:
     return views
 
 
-def is_shorten_link(url) -> bool:
-    parsed = urlparse(url)
-    if parsed.hostname == 'vk.cc':
-        return True
-    return False
+def is_shorten_link(token, url) -> bool:
+    try:
+        count_clicks(token, url)
+    except requests.exceptions.InvalidURL:
+        return False
+
+    return True
 
 
 def main():

@@ -22,7 +22,7 @@ def shorten_link(token: str, url: str, private: int = 0) -> str:
     response.raise_for_status()
 
     if 'error' in response.json():
-        raise requests.exceptions.HTTPError(response=response)
+        raise requests.exceptions.InvalidURL(response=response)
 
     short_link = response.json()['response']['short_url']
 
@@ -45,7 +45,7 @@ def count_clicks(token: str, url: str) -> int | None:
     response.raise_for_status()
 
     if 'error' in response.json():
-        raise requests.exceptions.HTTPError(response=response)
+        raise requests.exceptions.InvalidURL(response=response)
 
     stats = response.json()['response']['stats']
 
@@ -83,7 +83,7 @@ def main():
             short_link = shorten_link(vk_token, url)
             print('Сокращенная ссылка:', short_link)
 
-    except requests.exceptions.HTTPError:
+    except requests.exceptions.InvalidURL:
         print('Неверная ссылка')
 
 

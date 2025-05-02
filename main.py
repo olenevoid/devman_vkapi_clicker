@@ -21,10 +21,12 @@ def shorten_link(token: str, url: str, private: int = 0) -> str:
 
     response.raise_for_status()
 
-    if 'error' in response.json():
+    response_data = response.json()
+
+    if 'error' in response_data:
         raise requests.exceptions.InvalidURL(response=response)
 
-    short_link = response.json()['response']['short_url']
+    short_link = response_data['response']['short_url']
 
     return short_link
 

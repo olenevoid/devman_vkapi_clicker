@@ -66,6 +66,9 @@ def count_clicks(token: str, url: str) -> int | None:
 def is_shorten_link(token, url) -> bool:
     parsed_link = urlparse(url)
 
+    # The valid url should have vk.cc domain and not raise
+    # the InvalidURL exception
+
     if parsed_link.hostname != 'vk.cc':
         return False
 

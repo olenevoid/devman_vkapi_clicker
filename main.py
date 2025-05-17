@@ -2,6 +2,7 @@ import requests
 from dotenv import load_dotenv
 from os import environ
 from urllib.parse import urlparse
+import argparse
 
 
 VK_API_VERSION = '5.199'
@@ -65,17 +66,30 @@ def count_clicks(token: str, url: str) -> int | None:
 def is_vkcc_link(url) -> bool:
     parsed_link = urlparse(url)
 
+    # The valid url should have vk.cc domain and not raise
+    # the InvalidURL exception
+
     if parsed_link.hostname != 'vk.cc':
         return False
 
     return True
 
 
+def prepare_argparser() -> argparse.ArgumentParser:
+    text = 'Возвращает короткую ссылку. Показывает количество кликов, если отправить короткую ссылку'
+    parser  = argparse.ArgumentParser(
+        description=text
+    )
+    parser.add_argument('url', help='Ссылка для сокращения или получения статистики')
+    return parser
+
+
 def main():
     load_dotenv()
     vk_token = environ['VK_TOKEN']
-
-    url = input('Введите ссылку: ')
+    parser = prepare_argparser()
+    args = parser.parse_args()
+    url = args.url
     try:
         if is_vkcc_link(vk_token, url):
 

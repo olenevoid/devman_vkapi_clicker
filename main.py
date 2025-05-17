@@ -63,15 +63,6 @@ def count_clicks(token: str, url: str) -> int | None:
     return views
 
 
-def is_vkcc_link(url) -> bool:
-    parsed_link = urlparse(url)
-
-    if parsed_link.hostname != 'vk.cc':
-        return False
-
-    return True
-
-
 def prepare_argparser() -> argparse.ArgumentParser:
     text = 'Возвращает короткую ссылку. Показывает количество кликов, если отправить короткую ссылку'
     parser = argparse.ArgumentParser(

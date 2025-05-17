@@ -91,7 +91,7 @@ def main():
     args = parser.parse_args()
     url = args.url
     try:
-        if is_vkcc_link(vk_token, url):
+        if is_vkcc_link(url):
 
             clicks = count_clicks(vk_token, url)
 

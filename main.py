@@ -88,22 +88,20 @@ def main():
     args = parser.parse_args()
     url = args.url
     try:
-        if is_vkcc_link(url):
+        clicks = count_clicks(vk_token, url)
 
-            clicks = count_clicks(vk_token, url)
-
-            if clicks is None:
-                print('Возможно, превышен лимит обращений к API.')
-            else:
-                print('Количество кликов:', clicks)
-
+        if clicks is None:
+            print('Возможно, превышен лимит обращений к API.')
         else:
+            print('Количество кликов:', clicks)
 
+    except requests.exceptions.InvalidURL:
+        try:
             short_link = shorten_link(vk_token, url)
             print('Сокращенная ссылка:', short_link)
 
-    except requests.exceptions.InvalidURL:
-        print('Вы ввели неверную ссылку')
+        except requests.exceptions.InvalidURL:
+            print('Вы ввели неверную ссылку')
 
 
 if __name__ == '__main__':

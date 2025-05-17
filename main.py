@@ -74,7 +74,7 @@ def is_vkcc_link(url) -> bool:
 
 def prepare_argparser() -> argparse.ArgumentParser:
     text = 'Возвращает короткую ссылку. Показывает количество кликов, если отправить короткую ссылку'
-    parser  = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
         description=text
     )
     parser.add_argument('url', help='Ссылка для сокращения или получения статистики')
